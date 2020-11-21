@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="My weather app built using Node.js and Express.js">
+        <meta name="keywords" content="Weather, Rahul5430">
+        <meta name="author" content="Rahul5430">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Weather</title>
+        <link rel="apple-touch-icon" sizes="180x180" href="/Images/favicon_io/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/Images/favicon_io/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/Images/favicon_io/favicon-16x16.png">
+        <link rel="manifest" href="/Images/favicon_io/site.webmanifest">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="/Styles/style.css">
+        <script src="/Scripts/scripts.js" defer></script>
+    </head>
+    <body class="text-center d-flex justify-content-center">
+        <div class="content col-sm-4 d-flex flex-column justify-content-center">
+            <% if (data === '') { %>
+                <div>
+                    <a href="https://github.com/Rahul5430/weather-app" target="_blank">
+                        <img src="/Images/Github-Mark/PNG/GitHub-Mark-32px.png" alt="github-logo" style="margin-top: -30px;">
+                    </a>
+                    <h2 class="heading">Current Weather</h2>
+                    <h5 id="time" class="mb-5"></h5>
+                </div>
+                <form data-form class="text-center" action="/" method="POST">
+                    <div class="form-group has-feedback">
+                        <input data-input type="text" id="cityInput" class="form-control" name="cityName" placeholder="Enter City Name">
+                        <button class="btn" style="position: relative; float: right; z-index: 2; margin-top: -37px; color: #333;">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+                <div id="empty">
+                    <div id="smiling-sun">
+                        <img src="/Images/smiling-sun-rays.a940682f.png" alt="smiling-sun-rays" id="smiling-sun-rays">
+                        <img src="/Images/smiling-sun-face.a8a1054a.png" alt="smiling-sun-face" id="smiling-sun-face">
+                    </div>
+                    <div id="help-text">
+                        <span>Search for a location to check the weather</span>
+                    </div>
+                </div>
+            <% } else if (data === '0') { %>
+                <h2>Oops! Lost in space🚀, try locations from Earth🌏 !</h2>
+                <a href="/" class="btn btn-primary mt-5 mx-auto">New location</a>
+            <% } else { %>
+                <div>
+                    <a href="https://github.com/Rahul5430/weather-app" target="_blank">
+                        <img src="/Images/Github-Mark/PNG/GitHub-Mark-32px.png" alt="github-logo" style="margin-top: -30px;">
+                    </a>
+                    <h2 class="heading">Current Weather</h2>
+                    <h5 id="time" class="mb-5"></h5>
+                </div>
+                <form data-form class="text-center" action="/" method="POST">
+                    <div class="form-group">
+                        <input data-input type="text" id="cityInput" class="form-control" name="cityName" placeholder="Enter City Name">
+                        <button class="btn" style="position: relative; float: right; z-index: 2; margin-top: -37px; color: #333;">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+                <div data-weather-title>
+                    <img style="max-width: 50px; max-height: 50px;" data-icon src="https://openweathermap.org/img/wn/<%= data.weather[0].icon %>@2x.png" alt="weather-icon">
+                    <span class="temp">
+                        <%= data.main.temp %><sup>o</sup>C
+                    </span>
+                </div>
+                <h1 class="cover-heading" data-name><%= data.name %>, <%= data.sys.country %></h1>
+                <p class="lead" data-status><%= data.weather[0].main %> | <%= data.weather[0].description %></p>
+                <p class="lead" data-humid>Humidity: <%= data.main.humidity %>%</p>
+                <p class="lead" data-feels-like>Feels like: <%= data.main.feels_like %><sup>o</sup>C</p>
+                <!--<div>
+                    <button class="btn btn-light" data-celcius>Celcius</button>
+                    <button class="btn btn-success" data-fahrenheit>Fahrenheit</button>
+                </div>-->
+            <% } %>
+        </div>
+        <footer>
+            <span id="powered-by">
+                Powered by 
+                <a rel="noopener noreferrer" target="_blank" href="https://openweathermap.org/api">OpenWeatherMap API</a>
+            </span>
+        </footer>
+    </body>
+</html>
